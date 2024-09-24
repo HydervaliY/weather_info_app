@@ -1,43 +1,72 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(WeatherApp());
 }
 
-class MyApp extends StatelessWidget {
+class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Weather Info App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: WeatherHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class WeatherHomePage extends StatefulWidget {
+  @override
+  _WeatherHomePageState createState() => _WeatherHomePageState();
+}
+
+class _WeatherHomePageState extends State<WeatherHomePage> {
+  final TextEditingController _controller = TextEditingController();
+  String _cityName = '';
+  String _weatherInfo = '';
+
+  void _fetchWeather() {
+    // This will simulate fetching weather data
+    setState(() {
+      _cityName = _controller.text;
+      _weatherInfo = ''; // Will be updated in the next step
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: Text('Weather Info'),
       ),
-      body: Center(
-        child: Text(
-          'Hello, Flutter!',
-          style: TextStyle(fontSize: 24),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: 'Enter city name',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _fetchWeather,
+              child: Text('Fetch Weather'),
+            ),
+            SizedBox(height: 16),
+            if (_cityName.isNotEmpty)
+              Text(
+                'Weather in $_cityName: $_weatherInfo',
+                style: TextStyle(fontSize: 20),
+              ),
+          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
 }
-//first commit
