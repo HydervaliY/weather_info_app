@@ -35,6 +35,14 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
     });
   }
 
+void _fetch7DayForecast() {
+  setState(() {
+    _cityName = _controller.text;
+    // Simulated forecast data for 7 days
+    _weatherInfo = 'Forecast for $_cityName:\n1. Sunny, 25°C\n2. Cloudy, 20°C\n3. Rainy, 18°C\n4. Sunny, 26°C\n5. Windy, 22°C\n6. Rainy, 19°C\n7. Sunny, 24°C';
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +66,11 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
               onPressed: _fetchWeather,
               child: Text('Fetch Weather'),
             ),
+            ElevatedButton(
+              onPressed: _fetch7DayForecast,
+              child: Text('Fetch 7-Day Forecast'),
+            ),
+
             SizedBox(height: 16),
             if (_cityName.isNotEmpty && _weatherInfo.isNotEmpty)
               Text(
