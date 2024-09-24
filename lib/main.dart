@@ -27,21 +27,13 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
   String _cityName = '';
   String _weatherInfo = '';
 
-  // void _fetchWeather() {
-  //   // This will simulate fetching weather data
-  //   setState(() {
-  //     _cityName = _controller.text;
-  //     _weatherInfo = ''; // Will be updated in the next step
-  //   });
-  // }
-
-void _fetchWeather() {
-  setState(() {
-    _cityName = _controller.text;
-    // Simulate fetching weather data
-    _weatherInfo = 'Sunny, ${15 + (25 * (0.5 - (new DateTime.now().millisecond % 100) / 100))}°C'; // Example data
-  });
-}
+  void _fetchWeather() {
+    setState(() {
+      _cityName = _controller.text;
+      // Simulated weather data
+      _weatherInfo = 'Sunny, ${15 + (25 * (0.5 - (new DateTime.now().millisecond % 100) / 100))}°C';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +59,7 @@ void _fetchWeather() {
               child: Text('Fetch Weather'),
             ),
             SizedBox(height: 16),
-            if (_cityName.isNotEmpty)
+            if (_cityName.isNotEmpty && _weatherInfo.isNotEmpty)
               Text(
                 'Weather in $_cityName: $_weatherInfo',
                 style: TextStyle(fontSize: 20),
